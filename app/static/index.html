@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <title>ORBIT</title>
+  <meta name="theme-color" content="#6f5cff" />
+  <link rel="icon" href="/orbit.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="64x64" href="/orbit-64.png" />
+  <link rel="apple-touch-icon" href="/orbit-192.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <button class="brand focusable" data-focusable data-view="home" aria-label="Inicio"><span class="brand-mark"><img src="/orbit-64.png" alt="" /></span><span class="brand-name">ORBIT</span></button>
+      <nav class="nav-stack">
+        <button class="nav-item active focusable" data-focusable data-view="home"><span>⌂</span><b>Inicio</b></button>
+        <button class="nav-item focusable" data-focusable data-view="library"><span>▦</span><b>Biblioteca</b></button>
+        <button class="nav-item focusable" data-focusable data-view="collections"><span>◆</span><b>Colecciones</b></button>
+        <button class="nav-item focusable" data-focusable data-view="saves"><span>☁</span><b>Partidas</b></button>
+        <button class="nav-item focusable" data-focusable data-view="stats"><span>◴</span><b>Estadísticas</b></button>
+        <button class="nav-item focusable" data-focusable data-view="settings"><span>⚙</span><b>Ajustes</b></button>
+        <button class="nav-item focusable" data-focusable data-view="diagnostics"><span>◇</span><b>Diagnóstico</b></button>
+        <button class="nav-item focusable" data-focusable data-view="help"><span>?</span><b>Ayuda</b></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div id="controllerStatus" class="controller-pill"><span class="dot"></span><span>Sin mando</span></div>
+        <button class="icon-button focusable" data-focusable id="fullscreenButton" title="Pantalla completa">⛶</button>
+        <button class="icon-button focusable" data-focusable id="exitButton" title="Salir de ORBIT">⏻</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div><p class="eyebrow" id="viewEyebrow">TU CONSOLA PORTABLE</p><h1 id="viewTitle">Inicio</h1></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="globalSearch" class="focusable" data-focusable type="search" placeholder="Buscar juegos" autocomplete="off" /></label>
+          <button id="randomButton" class="secondary-button focusable" data-focusable title="Elegir un juego al azar">🎲</button>
+          <button id="refreshButton" class="secondary-button focusable" data-focusable>Actualizar</button>
+          <button id="emulatorCenterButton" class="secondary-button focusable setup-top-button" data-focusable>🎮 Emuladores</button>
+          <button id="addGameButton" class="primary-button focusable" data-focusable>＋ Añadir juego</button>
+        </div>
+      </header>
+
+      <section id="homeView" class="view active" data-view-panel="home"><div id="hero" class="hero-card"></div><div id="homeSections"></div></section>
+      <section id="libraryView" class="view" data-view-panel="library">
+        <div class="toolbar panel"><div id="smartFilters" class="chip-row"></div><div class="toolbar-right"><div id="platformFilters" class="chip-row"></div><select id="sortSelect" class="select-control focusable" data-focusable><option value="recent">Recientes</option><option value="name">Nombre</option><option value="time">Tiempo jugado</option><option value="platform">Plataforma</option><option value="added">Añadidos</option></select></div></div>
+        <div id="libraryGrid" class="game-grid"></div>
+      </section>
+      <section id="collectionsView" class="view" data-view-panel="collections"><div class="section-toolbar"><p>Organiza tu biblioteca en grupos propios.</p><button id="newCollectionButton" class="primary-button focusable" data-focusable>＋ Colección</button></div><div id="collectionsContent"></div></section>
+      <section id="savesView" class="view" data-view-panel="saves"><div id="savesContent"></div></section>
+      <section id="statsView" class="view" data-view-panel="stats"><div id="statsContent"></div></section>
+      <section id="settingsView" class="view" data-view-panel="settings"><div id="settingsContent"></div></section>
+      <section id="diagnosticsView" class="view" data-view-panel="diagnostics">
+        <div class="diag-layout"><article class="settings-card"><div class="card-heading"><div><p class="eyebrow">EQUIPO ACTUAL</p><h2>Sistema</h2></div><button id="runDiagnosticsButton" class="secondary-button focusable" data-focusable>Comprobar</button></div><div id="systemInfo" class="system-grid"></div></article><article class="settings-card"><div class="card-heading"><div><p class="eyebrow">ESTADO</p><h2>Diagnóstico</h2></div></div><div id="diagnosticList" class="list-stack"></div></article></div>
+      </section>
+      <section id="helpView" class="view" data-view-panel="help"><div id="helpContent"></div></section>
+    </main>
+
+    <footer class="hintbar"><span><kbd id="hintAccept">A</kbd> Seleccionar</span><span><kbd id="hintBack">B</kbd> Atrás</span><span><kbd id="hintSearch">Y</kbd> Buscar</span><span><kbd id="hintMenu">X</kbd> Menú</span><span><kbd id="hintFavorite">LB</kbd> Favorito</span><span id="activeSessionHint"></span><span id="storageHint"></span></footer>
+  </div>
+  <div id="profileGate" class="profile-gate" hidden></div>
+  <div id="controllerMenu" class="controller-menu" hidden></div>
+  <div id="modalBackdrop" class="modal-backdrop" hidden><div id="modal" class="modal" role="dialog" aria-modal="true"></div></div>
+  <div id="toastHost" class="toast-host" aria-live="polite"></div>
+  <div id="inputModeIndicator" class="input-mode-indicator" hidden></div>
+  <div id="gamepadPointer" class="gamepad-pointer" hidden aria-hidden="true"></div>
+  <script src="/navigation.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
